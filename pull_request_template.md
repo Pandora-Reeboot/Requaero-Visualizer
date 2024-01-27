@@ -2,7 +2,7 @@
 *Please include a summary of the changes and the related issue*
 
 
-Fixes: #(issue)
+- [ ] **Fixes: #(issue)**
 
 
 ## Testing Output
@@ -17,3 +17,6 @@ Fixes: #(issue)
 - [ ] My changes generate no new warnings
 - [ ] I have added tests that prove my fix is effective or that my feature works
 - [ ] New and existing unit tests pass locally with my changes
+
+## Not Applicable
+- [ ] Drag anything not applicable down to this section
