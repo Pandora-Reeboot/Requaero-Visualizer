@@ -11,7 +11,6 @@
 BINARY_NAME=raquaero
 GO_BUILD= GOARCH=amd64 GOOS=linux
 OUT_DIR=./out
-TEST_DIR=./test
 
 ##     help:       prints the help statements in the make file
 help:
