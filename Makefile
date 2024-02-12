@@ -11,6 +11,7 @@
 BINARY_NAME=raquaero
 GO_BUILD= GOARCH=amd64 GOOS=linux
 OUT_DIR=./out
+TEST_DIR=./test
 
 ##     help:       prints the help statements in the make file
 help:
@@ -21,8 +22,8 @@ all: clean build run
 
 ##     build:      builds the requaero project
 build:
-	mkdir -p ${OUT_DIR}
-	${GO_BUILD} go build -o ${OUT_DIR}/${BINARY_NAME}-linux main.go
+	mkdir -p $(OUT_DIR)
+	go build -o $(OUT_DIR)/$(BINARY_NAME)-linux main.go
 
 ##     vendor:     updates the vendor if the go.mod file has been updated
 vendor:
@@ -31,12 +32,12 @@ vendor:
 
 ##     run:        runs the requaero project, build is a dependency
 run: build
-	${OUT_DIR}/${BINARY_NAME}-linux
+	$(OUT_DIR)/$(BINARY_NAME)-linux
 
 ##     clean:      clean project and remove .out directory
 clean:
 	go clean
-	rm -rf ${OUT_DIR}
+	rm -rf $(OUT_DIR)
 
 ##
 ##
