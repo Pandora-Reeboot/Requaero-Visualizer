@@ -1,0 +1,34 @@
+# Options for analysis running.
+run:
+  # See the dedicated "run" documentation section.
+
+# output configuration options
+output:
+  # See the dedicated "output" documentation section.
+  show-stats: true
+  sort-results: true
+  sort-order:
+    - file
+    - severity
+    - linter
+
+# All available settings of specific linters.
+linters-settings:
+  # See the dedicated "linters-settings" documentation section.
+
+linters:
+  # See the dedicated "linters" documentation section.
+  disable-all: true
+  enable:
+    - errcheck
+    - gosimple
+    - govet
+    - ineffassign
+    - staticcheck
+    - unused
+
+issues:
+  # See the dedicated "issues" documentation section.
+
+severity:
+  # See the dedicated "severity" documentation section.
