@@ -1,0 +1,64 @@
+##
+## Makefile for requaero project
+##
+## Usage:
+##
+##     make <command>
+##
+## The commands for the Makefile are:
+##
+
+BINARY_NAME=raquaero
+ALLOWED_PACKAGES="I don't know what goes here yet
+ but this is the packages that will be looped through for testing"
+
+##     all:        call a <clean> <run> and <build> of the requaero project
+all: clean build run
+
+## NOTE this is where the lint section should go 
+
+## Test section for running packages and Green for pass and Red for Fail
+
+test:
+	@echo "Running tests my Dudes.."
+	@GREEN="\033[0;32m" RED="\033[0;31m" RESET="\033[0m" ; \
+	PASSED=0; FAILED=0; \
+	for pkg in $(ALLOWED_PACKAGES); do \
+		echo "Testing package $$pkg"; \  
+		output=$$(go test -v $$pkg | grep -E "PASS|FAIL"); \
+		if echo $$output | grep -q "FAIL"; then \
+			FAILED=1; \
+			echo -e "$$output" | sed "s/FAIL/$$RED&$$RESET/g"; \
+		else \
+			PASSED=1; \
+			echo -e "$$output" | sed "s/PASS/$$GREEN&$$RESET/g"; \
+		fi; \
+	done; \
+	if [ $$FAILED -eq 1 ]; then \
+		exit 1; \
+	fi
+
+##     build:      builds the requaero project
+build:
+	mkdir -p out/
+	GOARCH=amd64 GOOS=linux go build -o ./out/${BINARY_NAME}-linux main.go
+
+##     vendor:     updates the vendor if the go.mod file has been updated
+vendor:
+	go mod vendor
+
+##     run:        runs the requaero project, build is a dependency
+run: build
+	./out/${BINARY_NAME}-linux
+
+##     clean:      clean project and remove .out directory
+clean:
+	go clean
+	rm -rf ./out
+
+##     help:       prints the help statements in the make file
+help:
+	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
+
+##
+##
