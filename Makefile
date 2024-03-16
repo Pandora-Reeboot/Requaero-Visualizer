@@ -17,7 +17,7 @@ help:
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
 
 ##     all:        call a <clean> <run> and <build> of the requaero project
-all: clean build run
+all: clean lint build run
 
 ##     build:      builds the requaero project
 build:
@@ -37,6 +37,10 @@ run: build
 clean:
 	go clean
 	rm -rf $(OUT_DIR)
+
+##     lint:       run golangci-lint on the project using configuration file
+lint: vendor
+	golangci-lint run
 
 ##
 ##
